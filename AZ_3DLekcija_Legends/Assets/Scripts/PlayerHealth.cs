@@ -6,17 +6,25 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int startingHealth;
     [SerializeField] private float hitInterval = 0.5f;
+    [SerializeField] private int healthGainedPerLevel = 5;
     
     private float lastHitTime = 0;
     private int currentHealth;
+    private int currentMaxHealth;
     private Animator animator;
 
     public static bool isAlive = true;
     void Awake()
     {
         currentHealth = startingHealth;
+        currentMaxHealth = startingHealth;
         animator = GetComponent<Animator>();
         isAlive = true;
+    }
+
+    public float GetHealthRatio()
+    {
+        return (float) currentHealth / (float) currentMaxHealth;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -39,5 +47,10 @@ public class PlayerHealth : MonoBehaviour
             isAlive = false;
             animator.SetTrigger("Death");
         }
+    }
+    public void OnLevelGained(int newLevel)
+    {
+        currentMaxHealth = startingHealth + (newLevel - 1) * healthGainedPerLevel;
+        currentHealth = currentMaxHealth;
     }
 }

@@ -6,10 +6,10 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Transform target;
     [SerializeField] private Collider swordCollider;
     [SerializeField] private float attackInterval = 1.5f;
     
+    public Transform target;
     private float lastAttacktTime = 0;
     private NavMeshAgent agent;
     private Animator animator;
