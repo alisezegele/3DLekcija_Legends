@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
         Debug.Log(name + " HAS DIED!");
         isDead = true;
         agent.isStopped = false;
+        StartCoroutine(RemoveEnemy());
     }
     private void Update()
     {
@@ -60,5 +61,11 @@ public class Enemy : MonoBehaviour
                 animator.SetTrigger("Attack");
             }
         }
+    }
+
+    private IEnumerator RemoveEnemy()
+    {
+        yield return new WaitForSeconds(4f);
+        Destroy(gameObject);
     }
 }

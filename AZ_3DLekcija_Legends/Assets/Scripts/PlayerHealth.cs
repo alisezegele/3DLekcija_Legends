@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int startingHealth;
     [SerializeField] private float hitInterval = 0.5f;
     [SerializeField] private int healthGainedPerLevel = 5;
+    [SerializeField] private ParticleSystem bloodEffect;
     
     private float lastHitTime = 0;
     private int currentHealth;
@@ -38,6 +39,12 @@ public class PlayerHealth : MonoBehaviour
         lastHitTime = Time.time;
         currentHealth -= damage;
         Debug.Log("Current health: " + currentHealth);
+        
+        if (bloodEffect != null)
+        {
+            bloodEffect.Play();
+        }
+        
         if (currentHealth > 0)
         {
             animator.SetTrigger("Hit");

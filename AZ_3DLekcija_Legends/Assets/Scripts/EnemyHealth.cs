@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int startingHealth;
     [SerializeField] private float hitInterval = 0.5f;
     [SerializeField] private int xpToGive = 20;
+    [SerializeField] private ParticleSystem bloodEffect;
     
     public UnityEvent OnDeath;
 
@@ -40,6 +41,12 @@ public class EnemyHealth : MonoBehaviour
     {
         lastHitTime = Time.time;
         currentHealth -= damage;
+
+        if (bloodEffect != null)
+        {
+            bloodEffect.Play();
+        }
+        
         if (currentHealth > 0)
         {
             animator.SetTrigger("Hit");
