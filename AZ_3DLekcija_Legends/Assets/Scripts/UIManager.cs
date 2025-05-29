@@ -82,7 +82,7 @@ public class UIManager : MonoBehaviour
     
     public void TriggerHouseEntered()
     {
-        int playerLevel = LevelManager.instance.GetCurrentLevel(); // Call a getter method
+        int playerLevel = LevelManager.instance.GetCurrentLevel();
         finalLevelText.text = "LEVEL REACHED: " + playerLevel;
         
         winPanel.SetActive(true);
