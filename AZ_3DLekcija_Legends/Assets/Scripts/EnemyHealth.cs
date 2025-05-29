@@ -41,6 +41,7 @@ public class EnemyHealth : MonoBehaviour
     {
         lastHitTime = Time.time;
         currentHealth -= damage;
+        SoundManager.instance.PlayEnemyHit();
 
         if (bloodEffect != null)
         {

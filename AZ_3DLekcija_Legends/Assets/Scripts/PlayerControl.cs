@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float moveSpeed = 7;
     [SerializeField] private Collider[] weapons;
+    [SerializeField] private PlayerMana mana;
     
     private CharacterController characterController;
     private Animator animator;
@@ -18,6 +19,7 @@ public class PlayerControl : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         targetPosition = transform.position;
+        mana = GetComponent<PlayerMana>();
     }
     public void BeginAttack()
     {
@@ -62,6 +64,18 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             animator.SetTrigger("Stab");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && PlayerHealth.isAlive)
+        {
+            if (mana.TryUseMana(1f))
+            {
+                animator.SetTrigger("SpinAttack");
+            }
+            else
+            {
+                Debug.Log("Not enough mana!");
+            }
         }
     }
 }

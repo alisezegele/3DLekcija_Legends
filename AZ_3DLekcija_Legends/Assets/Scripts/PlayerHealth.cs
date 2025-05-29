@@ -8,7 +8,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float hitInterval = 0.5f;
     [SerializeField] private int healthGainedPerLevel = 5;
     [SerializeField] private ParticleSystem bloodEffect;
-    
+
+    public UIManager uiManager;
     private float lastHitTime = 0;
     private int currentHealth;
     private int currentMaxHealth;
@@ -38,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
     {
         lastHitTime = Time.time;
         currentHealth -= damage;
+        SoundManager.instance.PlayPlayerHit();
         Debug.Log("Current health: " + currentHealth);
         
         if (bloodEffect != null)
@@ -53,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
         {
             isAlive = false;
             animator.SetTrigger("Death");
+            uiManager.GameOverPanel();
         }
     }
     public void OnLevelGained(int newLevel)

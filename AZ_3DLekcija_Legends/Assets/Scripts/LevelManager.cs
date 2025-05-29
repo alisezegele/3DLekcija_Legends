@@ -34,4 +34,9 @@ public class LevelManager : MonoBehaviour
             CalculateLevel();
         }
     }
+
+    public int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
 }
